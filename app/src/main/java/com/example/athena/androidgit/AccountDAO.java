@@ -53,19 +53,21 @@ public class AccountDAO {
         return accounts;
     }
 
-    public Boolean searchByEmail(String email){
+    public Account searchByEmail(String email){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String condicao = DBHelper.EntradaBanda.COLUMN_EMAIL + " = ?";
-        String[] condicaoArg = {String.valueOf(email)};
-
-        int rows = db.query(DBHelper.EntradaBanda.TABLE_NAME, condicao, condicaoArg);
-
-        return rows > 0 ? true : false;
-    }
-
-    public void returnAccount(Boolean verification){
-        Account account = null;
+        Account account = new Account();
+        String[] column =
+                {DBHelper.EntradaBanda._ID,
+                        DBHelper.EntradaBanda.COLUMN_EMAIL,
+                        DBHelper.EntradaBanda.COLUMN_PASSWORD};
+        Cursor cursor = db.query(DBHelper.EntradaBanda.TABLE_NAME, column, email, null, null, null, null);
+        if (cursor.moveToFirst())
+        {
+            account.setId(cursor.getLong(cursor.getColumnIndex(DBHelper.EntradaBanda._ID)));
+            account.setEmail(cursor.getString(cursor.getColumnIndex(DBHelper.EntradaBanda.COLUMN_EMAIL)));
+            account.setPassword(cursor.getString(cursor.getColumnIndex(DBHelper.EntradaBanda.COLUMN_PASSWORD)));
+        }
+            return account;
     }
 
     public Boolean update(Account account)

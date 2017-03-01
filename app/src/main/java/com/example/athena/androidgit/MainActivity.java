@@ -29,9 +29,16 @@ public class MainActivity extends Activity {
 
     public void login(View v){
         Intent menu = new Intent(getApplicationContext(), MenuActivity.class);
+        Account accountVerification;
 
-        if(accountDAO.searchByEmail(editLogin.getText().toString()) == true){
-            startActivity(menu);
+        accountVerification = accountDAO.searchByEmail(editLogin.getText().toString());
+        if(accountVerification != null){
+            if(accountVerification.getPassword() == editPassword.getText().toString()){
+                finish();
+                startActivity(menu);
+            }else
+                Toast.makeText(this, "Account and Password don't match ", Toast.LENGTH_SHORT).show();
+
         }else {
             Toast.makeText(this, "Account don't match or account doesn't has created ", Toast.LENGTH_SHORT).show();
         }

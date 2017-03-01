@@ -29,19 +29,19 @@ public class SignUpActivity extends Activity {
         account.setEmail(editEmail.getText().toString());
         account.setPassword(editAccountPassword.getText().toString());
 
-        if(accountDAO.searchByEmail(editEmail.getText().toString())){
+        if(accountDAO.searchByEmail(editEmail.getText().toString()) != null){
             Toast.makeText(this, "That email is taken. Try another. " +
                     "if you forget your password try the button 'FORGOT YOUR PASSWORD?' ",
                     Toast.LENGTH_SHORT).show();
         }else{
             if(editAccountPassword.getText().toString() == editRePassword.getText().toString()){
+                finish();
                 long newID = accountDAO.insert(account);
 
                 if (newID != -1)
                 {
-                    Toast.makeText(this, "Registered with ID ", Toast.LENGTH_SHORT).show();
-                    String mensagem = "ACCOUNT Successfully registered and your Id is " + newID;
-                    Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+                    String message = "ACCOUNT Successfully registered and your Id is " + newID;
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 } else
                 {
                     Toast.makeText(this, "Registration not performed", Toast.LENGTH_SHORT).show();
