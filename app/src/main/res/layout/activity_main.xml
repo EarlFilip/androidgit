@@ -48,14 +48,14 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/editPassword" />
+        android:id="@+id/editAccountPassword" />
 
 
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editPassword"
+        android:layout_below="@+id/editAccountPassword"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="11dp"
@@ -75,7 +75,7 @@
         android:layout_alignRight="@+id/switchStay"
         android:layout_alignEnd="@+id/switchStay"
         android:layout_marginRight="41dp"
-        android:onClick="Login"
+        android:onClick="login"
         android:layout_marginEnd="41dp" />
 
     <Button

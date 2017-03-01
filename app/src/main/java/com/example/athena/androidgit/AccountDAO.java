@@ -59,7 +59,7 @@ public class AccountDAO {
         String condicao = DBHelper.EntradaBanda.COLUMN_EMAIL + " = ?";
         String[] condicaoArg = {String.valueOf(email)};
 
-        int rows = db.delete(DBHelper.EntradaBanda.TABLE_NAME, condicao, condicaoArg);
+        int rows = db.query(DBHelper.EntradaBanda.TABLE_NAME, condicao, condicaoArg);
 
         return rows > 0 ? true : false;
     }

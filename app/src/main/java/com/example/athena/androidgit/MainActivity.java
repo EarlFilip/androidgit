@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     EditText editLogin;
@@ -17,7 +18,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editLogin = (EditText) findViewById(R.id.editLogin);
-        editPassword = (EditText) findViewById(R.id.editPassword);
+        editPassword = (EditText) findViewById(R.id.editAccountPassword);
+        accountDAO= new AccountDAO(getApplicationContext());
     }
 
     public void SignUp(View v){
@@ -25,10 +27,13 @@ public class MainActivity extends Activity {
         startActivity(signUp);
     }
 
-    public void Login(View v){
-        if(accountDAO.searchByEmail(editLogin.getText().toString())){
-            Intent menu = new Intent(getApplicationContext(), MenuActivity.class);
+    public void login(View v){
+        Intent menu = new Intent(getApplicationContext(), MenuActivity.class);
+
+        if(accountDAO.searchByEmail(editLogin.getText().toString()) == true){
             startActivity(menu);
+        }else {
+            Toast.makeText(this, "Account don't match or account doesn't has created ", Toast.LENGTH_SHORT).show();
         }
     }
 }
