@@ -75,6 +75,7 @@
         android:layout_alignRight="@+id/switchStay"
         android:layout_alignEnd="@+id/switchStay"
         android:layout_marginRight="41dp"
+        android:onClick="Login"
         android:layout_marginEnd="41dp" />
 
     <Button

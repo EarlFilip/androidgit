@@ -64,6 +64,10 @@ public class AccountDAO {
         return rows > 0 ? true : false;
     }
 
+    public void returnAccount(Boolean verification){
+        Account account = null;
+    }
+
     public Boolean update(Account account)
     {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
