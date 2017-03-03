@@ -10,44 +10,44 @@ public class SignUpActivity extends Activity {
     EditText editEmail;
     EditText editAccountPassword;
     EditText editRePassword;
-    AccountDAO  accountDAO;
+    AccountDAO accountDAO;
+    Account verif;
+    Account account;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         editEmail = (EditText) findViewById(R.id.editEmail);
         editAccountPassword = (EditText) findViewById(R.id.editAccountPassword);
         editRePassword = (EditText) findViewById(R.id.editRePassword);
-        accountDAO= new AccountDAO(getApplicationContext());
+        accountDAO = new AccountDAO(getApplicationContext());
     }
 
-    public void create(View v)
-    {
-        Account account = new Account();
+    public void create(View v) {
+        account = new Account();
+        verif = new Account();
         account.setEmail(editEmail.getText().toString());
         account.setPassword(editAccountPassword.getText().toString());
 
-        if(accountDAO.searchByEmail(editEmail.getText().toString()) != null){
+        verif = accountDAO.searchByEmail(editEmail.getText().toString());
+        if (verif != null) {
             Toast.makeText(this, "That email is taken. Try another. " +
-                    "if you forget your password try the button 'FORGOT YOUR PASSWORD?' ",
+                            "if you forget your password try the button 'FORGOT YOUR PASSWORD?' ",
                     Toast.LENGTH_SHORT).show();
-        }else{
-            if(editAccountPassword.getText().toString() == editRePassword.getText().toString()){
+        } else {
+            if (editAccountPassword.getText().toString() == editRePassword.getText().toString()) {
                 finish();
                 long newID = accountDAO.insert(account);
 
-                if (newID != -1)
-                {
+                if (newID != -1) {
                     String message = "ACCOUNT Successfully registered and your Id is " + newID;
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-                } else
-                {
+                } else {
                     Toast.makeText(this, "Registration not performed", Toast.LENGTH_SHORT).show();
                 }
                 finish();
-            }else {
+            } else {
                 Toast.makeText(this, "These passwords don't match ", Toast.LENGTH_SHORT).show();
             }
         }

@@ -11,6 +11,7 @@ public class MainActivity extends Activity {
     EditText editLogin;
     EditText editPassword;
     AccountDAO accountDAO;
+    Account accountVerification;
 
 
     @Override
@@ -19,27 +20,27 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         editLogin = (EditText) findViewById(R.id.editLogin);
         editPassword = (EditText) findViewById(R.id.editAccountPassword);
-        accountDAO= new AccountDAO(getApplicationContext());
+        accountDAO = new AccountDAO(getApplicationContext());
     }
 
-    public void SignUp(View v){
+    public void SignUp(View v) {
         Intent signUp = new Intent(getApplicationContext(), SignUpActivity.class);
         startActivity(signUp);
     }
 
-    public void login(View v){
+    public void login(View v) {
         Intent menu = new Intent(getApplicationContext(), MenuActivity.class);
-        Account accountVerification;
+        accountVerification = new Account();
 
         accountVerification = accountDAO.searchByEmail(editLogin.getText().toString());
-        if(accountVerification != null){
-            if(accountVerification.getPassword() == editPassword.getText().toString()){
+        if (accountVerification != null) {
+            if (accountVerification.getPassword() == editPassword.getText().toString()) {
                 finish();
                 startActivity(menu);
-            }else
+            } else
                 Toast.makeText(this, "Account and Password don't match ", Toast.LENGTH_SHORT).show();
 
-        }else {
+        } else {
             Toast.makeText(this, "Account don't match or account doesn't has created ", Toast.LENGTH_SHORT).show();
         }
     }
