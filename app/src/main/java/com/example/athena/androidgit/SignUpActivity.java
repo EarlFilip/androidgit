@@ -11,8 +11,7 @@ public class SignUpActivity extends Activity {
     EditText editAccountPassword;
     EditText editRePassword;
     AccountDAO accountDAO;
-    Account verif;
-    Account account;
+    Account verification, account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,16 +21,16 @@ public class SignUpActivity extends Activity {
         editAccountPassword = (EditText) findViewById(R.id.editAccountPassword);
         editRePassword = (EditText) findViewById(R.id.editRePassword);
         accountDAO = new AccountDAO(getApplicationContext());
+        account = new Account();
     }
 
     public void create(View v) {
-        account = new Account();
-        verif = new Account();
         account.setEmail(editEmail.getText().toString());
         account.setPassword(editAccountPassword.getText().toString());
+        verification = new Account();
 
-        verif = accountDAO.searchByEmail(editEmail.getText().toString());
-        if (verif != null) {
+        verification = accountDAO.searchByEmail(editEmail.getText().toString());
+        if (verification.getEmail().toString() != null) {
             Toast.makeText(this, "That email is taken. Try another. " +
                             "if you forget your password try the button 'FORGOT YOUR PASSWORD?' ",
                     Toast.LENGTH_SHORT).show();

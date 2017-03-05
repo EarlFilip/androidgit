@@ -33,8 +33,8 @@ public class MainActivity extends Activity {
         accountVerification = new Account();
 
         accountVerification = accountDAO.searchByEmail(editLogin.getText().toString());
-        if (accountVerification != null) {
-            if (accountVerification.getPassword() == editPassword.getText().toString()) {
+        if (accountVerification.getEmail().toString() != null) {
+            if (accountVerification.getPassword().toString() == editPassword.getText().toString()) {
                 finish();
                 startActivity(menu);
             } else
